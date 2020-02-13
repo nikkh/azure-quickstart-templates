@@ -2,6 +2,18 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "vmSku": {
+    "type": "string",
+    "allowedValues": [
+        "Standard_B1ls",
+        "Standard_B1ms",
+        "Standard_B1s",
+        "Standard_B2ms"
+],
+    "defaultValue": "Standard_B1ls",
+    "metadata": {
+      "description": "Sku (size) for the Virtual Machine"
+    },
     "adminUsername": {
       "type": "string",
       "defaultValue": "azureuser",
@@ -17,7 +29,7 @@
     }
   },
   "variables": {
-    "vmSize": "Standard_DS2_v2",
+    "vmSize": "[parameters('vmSku')]",
     "vmName": "sshvm",
     "ubuntuOSVersion": "16.04-LTS",
     "uniqueDnsLabelPrefix": "[concat('store', uniquestring(resourceGroup().id))]",
