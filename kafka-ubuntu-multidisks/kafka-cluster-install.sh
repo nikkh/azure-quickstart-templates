@@ -48,7 +48,7 @@ help()
 log()
 {
 	# If you want to enable this logging add a un-comment the line below and add your account key 
-    	#curl -X POST -H "content-type:text/plain" --data-binary "$(date) | ${HOSTNAME} | $1" https://logs-01.loggly.com/inputs/[account-key]/tag/redis-extension,${HOSTNAME}
+    	curl -X POST -H "content-type:text/plain" --data-binary "$(date) | ${HOSTNAME} | $1" https://logs-01.loggly.com/inputs/beae4175-083d-4a15-837d-8aae340de76a/tag/redis-extension,${HOSTNAME}
 	echo "$1"
 }
 
@@ -138,7 +138,7 @@ expand_ip_range_for_server_properties() {
     IFS='-' read -a HOST_IPS <<< "$1"
     for (( n=0 ; n<("${HOST_IPS[1]}"+0) ; n++))
     do
-        echo "server.$(expr ${n} + 1)=${HOST_IPS[0]}${n}:2888:3888" >> zookeeper-3.4.6/conf/zoo.cfg       
+        echo "server.$(expr ${n} + 1)=${HOST_IPS[0]}${n}:2888:3888" >> zookeeper-3.5.6/conf/zoo.cfg       
     done
 }
 
@@ -163,22 +163,22 @@ install_zookeeper()
 {
 	mkdir -p /var/lib/zookeeper
 	cd /var/lib/zookeeper
-	wget "http://apache.cs.utah.edu/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz"
-	tar -xvf "zookeeper-3.4.6.tar.gz"
+	wget "http://apache.cs.utah.edu/zookeeper/zookeeper-3.5.6/zookeeper-3.5.6.tar.gz"
+	tar -xvf "zookeeper-3.5.6.tar.gz"
 
-	touch zookeeper-3.4.6/conf/zoo.cfg
+	touch zookeeper-3.5.6/conf/zoo.cfg
 
-	echo "tickTime=2000" >> zookeeper-3.4.6/conf/zoo.cfg
-	echo "dataDir=/var/lib/zookeeper" >> zookeeper-3.4.6/conf/zoo.cfg
-	echo "clientPort=2181" >> zookeeper-3.4.6/conf/zoo.cfg
-	echo "initLimit=5" >> zookeeper-3.4.6/conf/zoo.cfg
-	echo "syncLimit=2" >> zookeeper-3.4.6/conf/zoo.cfg
-	# OLD Test echo "server.1=${ZOOKEEPER_IP_PREFIX}:2888:3888" >> zookeeper-3.4.6/conf/zoo.cfg
+	echo "tickTime=2000" >> zookeeper-3.5.6/conf/zoo.cfg
+	echo "dataDir=/var/lib/zookeeper" >> zookeeper-3.5.6/conf/zoo.cfg
+	echo "clientPort=2181" >> zookeeper-3.5.6/conf/zoo.cfg
+	echo "initLimit=5" >> zookeeper-3.5.6/conf/zoo.cfg
+	echo "syncLimit=2" >> zookeeper-3.5.6/conf/zoo.cfg
+	# OLD Test echo "server.1=${ZOOKEEPER_IP_PREFIX}:2888:3888" >> zookeeper-3.5.6/conf/zoo.cfg
 	$(expand_ip_range_for_server_properties "${ZOOKEEPER_IP_PREFIX}-${INSTANCE_COUNT}")
 
 	echo $(($1+1)) >> /var/lib/zookeeper/myid
 
-	zookeeper-3.4.6/bin/zkServer.sh start
+	zookeeper-3.5.6/bin/zkServer.sh start
 }
 
 # Setup datadisks
