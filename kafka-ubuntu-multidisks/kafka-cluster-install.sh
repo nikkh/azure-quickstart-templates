@@ -166,19 +166,19 @@ install_zookeeper()
 	wget "http://apache.cs.utah.edu/zookeeper/zookeeper-3.5.6/apache-zookeeper-3.5.6.tar.gz"
 	tar -xvf "apache-zookeeper-3.5.6.tar.gz"
 
-	touch zookeeper-3.5.6/conf/zoo.cfg
+	touch apache-zookeeper-3.5.6/conf/zoo.cfg
 
-	echo "tickTime=2000" >> zookeeper-3.5.6/conf/zoo.cfg
-	echo "dataDir=/var/lib/zookeeper" >> zookeeper-3.5.6/conf/zoo.cfg
-	echo "clientPort=2181" >> zookeeper-3.5.6/conf/zoo.cfg
-	echo "initLimit=5" >> zookeeper-3.5.6/conf/zoo.cfg
-	echo "syncLimit=2" >> zookeeper-3.5.6/conf/zoo.cfg
-	# OLD Test echo "server.1=${ZOOKEEPER_IP_PREFIX}:2888:3888" >> zookeeper-3.5.6/conf/zoo.cfg
+	echo "tickTime=2000" >> apache-zookeeper-3.5.6/conf/zoo.cfg
+	echo "dataDir=/var/lib/zookeeper" >> apache-zookeeper-3.5.6/conf/zoo.cfg
+	echo "clientPort=2181" >> apache-zookeeper-3.5.6/conf/zoo.cfg
+	echo "initLimit=5" >> apache-zookeeper-3.5.6/conf/zoo.cfg
+	echo "syncLimit=2" >> apache-zookeeper-3.5.6/conf/zoo.cfg
+	# OLD Test echo "server.1=${ZOOKEEPER_IP_PREFIX}:2888:3888" >> apache-zookeeper-3.5.6/conf/zoo.cfg
 	$(expand_ip_range_for_server_properties "${ZOOKEEPER_IP_PREFIX}-${INSTANCE_COUNT}")
 
 	echo $(($1+1)) >> /var/lib/zookeeper/myid
 
-	zookeeper-3.5.6/bin/zkServer.sh start
+	apache-zookeeper-3.5.6/bin/zkServer.sh start
 }
 
 # Setup datadisks
