@@ -163,8 +163,8 @@ install_zookeeper()
 {
 	mkdir -p /var/lib/zookeeper
 	cd /var/lib/zookeeper
-	wget "http://apache.cs.utah.edu/zookeeper/zookeeper-3.5.6/zookeeper-3.5.6.tar.gz"
-	tar -xvf "zookeeper-3.5.6.tar.gz"
+	wget "http://apache.cs.utah.edu/zookeeper/zookeeper-3.5.6/apache-zookeeper-3.5.6.tar.gz"
+	tar -xvf "apache-zookeeper-3.5.6.tar.gz"
 
 	touch zookeeper-3.5.6/conf/zoo.cfg
 
